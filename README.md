@@ -15,3 +15,5 @@ http://localhost:8000/keys.json
 ```
 
 The endpoint will return the public keys in JSON format, which can be viewed with any browser's built-in JSON viewer. 
+
+to change the speed of the rotations (defualt 15 minutes) its     schedule.every(15).minutes+.do(rotate_key)
