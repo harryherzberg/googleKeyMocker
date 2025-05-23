@@ -1,19 +1,45 @@
 # JSON Keys Viewer
 
-A simple JSON endpoint that serves RSA public keys in JWK format, similar to Google's OAuth2 public keys endpoint.
+A lightweight JSON endpoint that serves RSA public keys in [JWK (JSON Web Key)](https://datatracker.ietf.org/doc/html/rfc7517) format, similar to Google’s OAuth2 public key endpoint.
 
-## Usage
+## 🚀 Usage
 
-1. Start the local server:
+1. **Start the local server:**
+
+   ```bash
+   python -m http.server 8000
+   ```
+
+2. **View the keys:**
+
+   ```
+   http://localhost:8000/keys.json
+   ```
+
+   This URL serves your current public keys in JSON format and can be viewed in any modern browser.
+
+## 🔁 Automatic Key Rotation
+
+To enable automatic key rotation, switch to the appropriate branch:
+
 ```bash
-python -m http.server 8000
+git checkout feature/automatic-key-rotation
 ```
 
-2. Access the keys at:
-```
-http://localhost:8000/keys.json
+The system rotates RSA keys every 15 minutes by default using:
+
+```python
+schedule.every(15).minutes.do(rotate_key)
 ```
 
-The endpoint will return the public keys in JSON format, which can be viewed with any browser's built-in JSON viewer. 
+### ⏱ To change the rotation interval:
 
-to change the speed of the rotations (defualt 15 minutes) its     schedule.every(15).minutes+.do(rotate_key)
+Edit the schedule line in your rotation script. For example, to rotate every 5 minutes:
+
+```python
+schedule.every(5).minutes.do(rotate_key)
+```
+
+## 🔐 Security Note
+
+Make sure your private keys are securely stored and never exposed publicly. Restrict access to `/keys.json` in production if needed.
