@@ -40,6 +40,3 @@ Edit the schedule line in your rotation script. For example, to rotate every 5 m
 schedule.every(5).minutes.do(rotate_key)
 ```
 
-## 🔐 Security Note
-
-Make sure your private keys are securely stored and never exposed publicly. Restrict access to `/keys.json` in production if needed.
